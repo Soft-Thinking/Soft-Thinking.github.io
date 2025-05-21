@@ -1,74 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="Soft Thinking: Unlocking the Reasoning Potential of LLMs in Continuous Concept Space">
-  <meta name="keywords" content="Soft Thinking, CoT, LLMs">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Soft Thinking</title>
+<style>
+  /* Global adjustments */
+  html {
+    scroll-behavior: smooth;
+  }
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="icon" href="./static/images/icon.png">
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #fcfcfc;
+    color: #2f2f2f;
+  }
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fcfcfc;
-      color: #333;
-    }
-    .hero.is-primary {
-      background: linear-gradient(120deg, #4e54c8, #8f94fb);
-      color: white;
-    }
-    .publication-title {
-      font-size: 2rem;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-    .publication-authors {
-      margin-top: 0.75em;
-      line-height: 1.6;
-    }
-    .link-block .button {
-      margin: 0.5em 0.5em;
-    }
-    .section img {
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .subtitle b {
-      color: #333;
-    }
-    table.table {
-      background: white;
-    }
-    .table thead {
-      background-color: #f0f0f0;
-    }
-    footer.footer {
-      background: #f9f9f9;
-      border-top: 1px solid #ddd;
-      padding: 2em 0;
-      font-size: 0.9em;
-    }
-    h2.title img {
-      vertical-align: middle;
-      margin-right: 0.5em;
-    }
-    .section h2.title {
-      margin-bottom: 1em;
-    }
-    .subtitle.has-text-centered {
-      margin-top: 1em;
-    }
-    .container.is-max-desktop {
-      max-width: 960px;
-    }
-  </style>
-</head>
-<body>
-  <!-- Content remains the same -->
-</body>
-</html>
+  h1.title, h2.title, h3.title {
+    font-family: 'Google Sans', sans-serif;
+    color: #1a1a1a;
+  }
+
+  /* Author and affiliation styling */
+  .publication-authors .author-block sup {
+    color: #6e6e6e;
+  }
+
+  .publication-authors a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  .publication-authors a:hover {
+    text-decoration: underline;
+  }
+
+  /* Buttons refinement */
+  .publication-links .button {
+    background: #1e1e1e;
+    color: white;
+    border: none;
+  }
+
+  .publication-links .button:hover {
+    background-color: #363636;
+    color: white;
+  }
+
+  /* Reference link colors */
+  a[href*="arxiv.org"] {
+    color: #c7254e;
+    font-weight: bold;
+  }
+
+  /* Teaser image adjustments */
+  #teaser {
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Icon alignment fix */
+  h2.title img {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  /* Table style adjustments */
+  table.table {
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .table thead {
+    background-color: #f0f0f0;
+  }
+
+  .table th, .table td {
+    vertical-align: middle !important;
+    text-align: center;
+  }
+
+  .table-container {
+    margin-top: 1.5rem;
+  }
+
+  /* Footer styling */
+  footer.footer {
+    background-color: #fafafa;
+    color: #6e6e6e;
+    font-size: 0.9em;
+  }
+
+  footer.footer a {
+    color: #007acc;
+  }
+</style>
