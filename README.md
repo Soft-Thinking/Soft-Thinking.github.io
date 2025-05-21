@@ -1,9 +1,9 @@
 # MMWorld-bench.github.io
 
 
-This is the repository that contains source code for the [MMWorld website](mmworld-bench.github.io).
+This is the repository that contains source code for the [Soft Thinking website](Soft-Thinking.github.io).
 
-If you find MMWorld useful for your work please cite:
+If you find Soft Thinking useful for your work please cite:
 ```
 ```
 
