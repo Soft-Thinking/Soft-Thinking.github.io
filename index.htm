@@ -1,93 +1,881 @@
-<style>
-  /* Global adjustments */
-  html {
-    scroll-behavior: smooth;
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Soft Thinking: Unlocking the Reasoning Potential of LLMs in Continuous Concept Space">
+  <meta name="keywords" content="Soft Thinking, CoT">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soft Thinking: Unlocking the Reasoning Potential of LLMs in Continuous Concept Space</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="icon" href="./static/images/icon.png">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <!-- <script src="https://assets.crowd.aws/crowd-html-elements.js"></script> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
+
+
+  <style>
+    /* .section {
+      padding: 3rem 1.5rem;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    #video-container {
+      margin-bottom: 2rem;
+    }
+
+    #question-container {
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .button.is-primary {
+      background-color: #3273dc;
+      border-color: transparent;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    .button.is-primary:hover {
+      background-color: #275ab0;
+      border-color: transparent;
+    }
+
+    .title img {
+      margin-right: 0.5rem;
+    }
+
+    .select {
+      width: 100%;
+      margin-top: 1rem;
+    } */
+
+    /* Hide the "Previewing Answers Submitted by Workers" message */
+    crowd-alert {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <!-- <img src="./static/image/worldevallogo.png" style="width:6em;vertical-align: middle" alt="Logo"/>  -->
+            <h1 class="title is-1 publication-title" style="display: inline-block;">Soft Thinking: Unlocking the Reasoning Potential of LLMs in Continuous Concept Space</h1>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://namezhenzhang.github.io/">Zhen Zhang</a><sup>1</sup><sup>,*,†</sup>,</span>
+            <span class="author-block">
+              <a href="https://sheehan1230.github.io/">Xuehai He</a><sup>2</sup><sup>,*</sup>,</span>
+            <span class="author-block">
+              <a href="https://weixi-feng.github.io/">Weixiang Yan</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://kzzheng.github.io/">Ao Shen</a><sup>4</sup>,</span>
+            <span class="author-block">
+              <a href="https://yujielu10.github.io/">Chenyang Zhao</a><sup>3,5</sup>,</span>
+            <span class="author-block">
+              <a href="https://wanrong-zhu.com/">Shuohang Wang</a><sup>6</sup>,</span>
+            <span class="author-block">
+              <a href="https://sites.google.com/view/jiachenli/">Yelong Shen</a><sup>6</sup>,</span>
+            <span class="author-block">
+              <a href="http://www.yfan.site/">Xin Eric Wang</a><sup>1,2,†</sup>,</span>
+            <!-- <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=vJWEw_8AAAAJ&hl=en">Jianfeng Wang</a><sup style="color: #90EE90;">3</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/linjie-li/">Linjie Li</a><sup style="color: #90EE90;">3</sup>,</span>
+            <span class="author-block">
+              <a href="https://zyang-ur.github.io/">Zhengyuan Yang</a><sup style="color: #90EE90;">3</sup>,</span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/kevinlin311tw/me">Kevin Lin</a><sup style="color: #90EE90;">3</sup>,</span>
+            <span class="author-block">
+              <a href="https://sites.cs.ucsb.edu/~william/">William Yang Wang</a><sup style="color: #ADD8E6;">2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.microsoft.com/en-us/research/people/lijuanw/">Lijuan Wang</a><sup style="color: #90EE90;">3</sup>,</span>
+            <span class="author-block">
+              <a href="https://eric-xw.github.io/">Xin Eric Wang</a><sup style="color: #FFB6C1;">†,1</sup>,</span> -->
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of California, Santa Barbara,</span>
+            <span class="author-block"><sup>2</sup>University of California, Santa Cruz,</span>
+            <span class="author-block"><sup>3</sup>University of California, Los Angeles,</span>
+            <span class="author-block"><sup>4</sup>Purdue University,</span>
+            <span class="author-block"><sup>5</sup>LMSYS Org,</span>
+            <span class="author-block"><sup>6</sup>Microsoft,</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><span class="equal-contribution">* Equal Contribution</span></span>
+          </div>
+          <!-- <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b style="color:#e08ba0; font-weight:normal"> <b>Under Review</b> </b></span>
+          </div> -->
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">†Corresponding to:</span>
+            <span class="author-block"><a href="mailto:zhen_zhang@ucsb.edu">zhen_zhang@ucsb.edu</a>,</span>
+            <span class="author-block"><a href="mailto:ericxwang@ucsb.edu">ericxwang@ucsb.edu</a></span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2406.08407"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://huggingface.co/datasets/Xuehai/MMWorld"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-database"></i>
+                  </span>
+                  <span>dataset</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/eric-ai-lab/MMWorld"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/eric-ai-lab/MMWorld"
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-alt"></i>
+                  </span>
+                  <span>arxiv</span>
+                  </a>
+              </span>
+<!-- 
+              <span class="link-block">
+                <a href="#leaderboard"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon has-text-white">
+                    <i class="fa-solid fa-trophy"></i>
+
+                  </span>
+                  <span>Leaderboard</span>
+                </a>
+              </span> -->
+
+
+
+             <!-- <span class="link-block">
+    <a href="https://huggingface.co/spaces/Xuehai/MMWorld" 
+       class="external-link button is-normal is-rounded is-dark">
+      <span class="icon">
+        <img src="https://huggingface.co/front/assets/huggingface_logo.svg" 
+             alt="Hugging Face" 
+             style="height: 1em; vertical-align: middle;">
+      </span>
+      <span>Hugging Face Leaderboard</span>
+    </a>
+</span> -->
+
+              
+              <!-- Visualization Link. -->
+              <!-- <span class="link-block">
+                <a href="https://eval.ai/web/challenges/challenge-page/2359/overview"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon has-text-white">
+                      <i class="fa-solid fa-medal"></i>
+                  </span>
+                  <span>EvalAI</span>
+                </a>
+              </span> -->
+              <!-- EvalAI Link. -->
+              <!-- <span class="link-block">
+                <a href="#examples"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon has-text-white">
+                    <i class="fa-solid fa-book"></i>
+                  </span>
+                  <span>Examples</span>
+                </a>
+              </span> -->
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" width="150%" src="./static/image/teaser5/teaser5-1.png">
+      <h2 class="subtitle has-text-centered">
+        <p style="font-family:Times New Roman"><b>Soft Thinking vs. Chain-of-Thought thinking on mathematical and coding datasets. Soft Thinking consistently improves both accuracy (with improvements of up to 2.48% on pass@1 accuracy) and generation efficiency (achieving up to 22.4% reduction in generation length) across both tasks, without any training.</b></p>
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Human cognition typically involves thinking through abstract, fluid concepts rather than strictly using discrete linguistic tokens. Current Large Language Models (LLMs), however, are constrained to reasoning within the boundaries of human language, processing discrete token embeddings that represent fixed points in semantic space. This discrete constraint restricts the expressive power and upper potential of such reasoning models, often causing incomplete exploration of reasoning paths, as standard Chain-of-Thought (CoT) methods rely on sampling one token per step. In this work, we introduce Soft Thinking, a training-free method that emulates human-like "soft" reasoning by generating soft, abstract concept tokens in a continuous concept space. These concept tokens are created by the probability-weighted mixture of token embeddings, which form the continuous concept space, enabling smooth transitions and richer representations that transcend traditional discrete boundaries. In essence, each generated concept token encapsulates multiple meanings from related discrete tokens, implicitly exploring various reasoning paths to converge effectively toward the correct answer. Empirical evaluations on diverse mathematical and coding benchmarks consistently demonstrate the effectiveness and efficiency of Soft Thinking, improving pass@1 accuracy by up to 2.48 points while simultaneously reducing token usage by up to 22.4% compared to standard CoT. Qualitative analysis further reveals that Soft Thinking outputs remain highly interpretable and readable, highlighting the potential of Soft Thinking to break the inherent bottleneck of discrete language-based reasoning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> Soft Thinking Pipeline </h2> 
+      </div>
+    </div>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-six-fifths">  
+            <img id="model" width="50%" src="./static/image/softthinking/softthinking-1.png">
+            <h3 class="subtitle has-text-centered">
+              <p style="font-family:Times New Roman"><b>Soft Thinking replaces discrete tokens with abstract concept tokens, enabling reasoning in continuous concept space. </b></p>
+            </h3>   
+        </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> An example of Soft Thinking and CoT</h2> 
+      </div>
+    </div>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-six-fifths">  
+            <img id="model" width="100%" src="./static/image/softthinking_example/softthinking_example-1.png">
+            <h3 class="subtitle has-text-centered">
+              <p style="font-family:Times New Roman"><b>A comparison between standard CoT and Soft Thinking on a multiplication problem. We select the token with the highest probability at each step of Soft Thinking for readability and interpretability. Full distribution is visualized in heatmap. Red text denotes repetitive, useless words.</b></p>
+            </h3>   
+        </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> Probability Distribution of Soft Thinking at Each Step </h2> 
+      </div>
+    </div>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-six-fifths">     
+            <img id="model" width="100%" src="./static/image/softthinking_heatmap/softthinking_heatmap-1.png">
+            <h3 class="subtitle has-text-centered">
+              <p style="font-family:Times New Roman"><b>An example illustrating the probability distribution of our proposed Soft Thinking method. At each step, top-k token candidates and their probabilities are shown.  Red boxes indicate the selected tokens that form the final generated sequence for readability and interpretability.</b></p>
+            </h3>   
+
+
+        </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> Study on MLLM Performance at Different Difficulty Levels for Average Humans</h2> 
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-half">  
+        <img id="model" width="100%" src="./static/image/difficulty_level.png">
+      </div>
+      <div class="column is-half">  
+        <img id="model" width="100%" src="./static/image/difficulty_level_by_discipline.png">
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h3 class="subtitle has-text-centered">
+          <p style="font-family:Times New Roman"><b>Figure 5. Model performance at different difficulty levels for average humans. Average human
+            difficulty levels are defined by 3 turkers' performance per question: Easy (3/3 correct answers),
+            medium (2/3 correct), hard (1/3 correct), and expert (0/3 correct).</b></p>
+        </h3>   
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+
+
+<!-- <section class="section" id="examples">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-five-fifths">
+        <h2 class="title is-3"><img id="painting_icon" width="5%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> Examples</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-six-fifths">
+        <div id="video-container">
+          <video id="example-video" width="100%" height="315" controls>
+            <source id="video-source" src="" type="video/mp4">
+          </video>
+        </div>
+
+        <div id="question-container">
+          <p id="question"></p>
+          <select id="options" required=""></select>
+        </div>
+
+        <div class="buttons">
+          <button id="prev-button" class="button is-primary">Previous</button>
+          <button id="next-button" class="button is-primary">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- 
+
+<section class="section" id="examples">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">
+          <img id="painting_icon" width="5%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png" alt="Painting Icon">
+          Examples
+        </h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <div id="video-container" class="box">
+          <video id="example-video" class="is-fullwidth" controls>
+            <source id="video-source" src="" type="video/mp4">
+          </video>
+
+          <p class="has-text-weight-bold" style="color: #4682b4;">Discipline: <span id="discipline" style="color: #4682b4;"></span></p>
+          <p class="has-text-weight-bold" style="color: #ff69b4;">Subdiscipline: <span id="subdiscipline" style="color: #ff69b4;"></span></p>
+          <p class="has-text-weight-bold" style="color: #66cdaa;">Question: <span id="question" style="color: #66cdaa;"></span></p>
+          <div class="select is-fullwidth" style="margin-top: 1rem;">
+            <select name="video-question-answer" id="options" required="">
+            </select>
+          </div>
+        </div>
+
+        
+
+        <div class="buttons is-centered">
+          <button id="prev-button" class="button is-primary is-light">Previous</button>
+          <button id="next-button" class="button is-primary is-light">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<div class="section" id="math-table">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">
+          <img width="5%" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Table Icon" style="vertical-align: middle;">
+          Accuracy and Generation Length on Mathematical Datasets
+        </h2>
+        <div class="table-container" style="overflow-x:auto;">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.95em;">
+            <thead>
+              <tr>
+                <th rowspan="2"></th>
+                <th colspan="5" style="border-right:2px solid #ccc"><strong>Accuracy &uarr;</strong></th>
+                <th colspan="5"><strong>Generation Length &darr;</strong></th>
+              </tr>
+              <tr>
+                <th>MATH 500</th>
+                <th>AIME 2024</th>
+                <th>GSM8K</th>
+                <th>GPQA Diamond</th>
+                <th style="border-right:2px solid #ccc">Avg.</th>
+                <th>MATH 500</th>
+                <th>AIME 2024</th>
+                <th>GSM8K</th>
+                <th>GPQA Diamond</th>
+                <th>Avg.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="9" style="text-align:center; font-weight:bold; background:#f5f5f5;">QwQ-32B&nbsp;<a href="https://arxiv.org/pdf/2412.06559" target="_blank" style="font-size:0.9em;">[1]</a></td>
+              </tr>
+              <tr>
+                <td>CoT Thinking</td>
+                <td>97.66</td>
+                <td>76.88</td>
+                <td>96.67</td>
+                <td>64.17</td>
+                <td style="border-right:2px solid #ccc">83.84</td>
+                <td>4156</td>
+                <td>12080</td>
+                <td>1556</td>
+                <td>8095</td>
+                <td>6472</td>
+              </tr>
+              <tr>
+                <td>CoT Thinking (Greedy)</td>
+                <td>97.00</td>
+                <td>80.00</td>
+                <td>96.57</td>
+                <td>65.15</td>
+                <td style="border-right:2px solid #ccc">84.68</td>
+                <td>3827</td>
+                <td>11086</td>
+                <td>1536</td>
+                <td>7417</td>
+                <td>5967</td>
+              </tr>
+              <tr style="font-weight:bold;">
+                <td>Soft Thinking</td>
+                <td>98.00</td>
+                <td>83.33</td>
+                <td>96.81</td>
+                <td>67.17</td>
+                <td style="border-right:2px solid #ccc">86.32</td>
+                <td>3644</td>
+                <td>10627</td>
+                <td>1391</td>
+                <td>7213</td>
+                <td>5719</td>
+              </tr>
+              <tr>
+                <td colspan="9" style="text-align:center; font-weight:bold; background:#f5f5f5;">DeepSeek-R1-Distill-Qwen-32B&nbsp;<a href="https://arxiv.org/pdf/2501.12948" target="_blank" style="font-size:0.9em; color: #2a7f62">[2]</a></td>
+              </tr>
+              <tr>
+                <td>CoT Thinking</td>
+                <td>94.50</td>
+                <td>72.08</td>
+                <td>95.61</td>
+                <td>63.10</td>
+                <td style="border-right:2px solid #ccc">81.32</td>
+                <td>3543</td>
+                <td>9347</td>
+                <td>875</td>
+                <td>6218</td>
+                <td>4995</td>
+              </tr>
+              <tr>
+                <td>CoT Thinking (Greedy)</td>
+                <td>93.00</td>
+                <td>63.33</td>
+                <td>95.30</td>
+                <td>59.09</td>
+                <td style="border-right:2px solid #ccc">77.68</td>
+                <td>3651</td>
+                <td>8050</td>
+                <td>1048</td>
+                <td>8395</td>
+                <td>5286</td>
+              </tr>
+              <tr style="font-weight:bold;">
+                <td>Soft Thinking</td>
+                <td>95.00</td>
+                <td>76.66</td>
+                <td>95.83</td>
+                <td>64.64</td>
+                <td style="border-right:2px solid #ccc">83.03</td>
+                <td>3373</td>
+                <td>6620</td>
+                <td>785</td>
+                <td>4722</td>
+                <td>3875</td>
+              </tr>
+              <tr>
+                <td colspan="9" style="text-align:center; font-weight:bold; background:#f5f5f5;">DeepSeek-R1-Distill-Llama-70B&nbsp;<a href="https://arxiv.org/pdf/2501.12948" target="_blank" style="font-size:0.9em; color: #6e6e6e">[3]</a></td>
+              </tr>
+              <tr>
+                <td>CoT Thinking</td>
+                <td>94.70</td>
+                <td>70.40</td>
+                <td>94.82</td>
+                <td>65.34</td>
+                <td style="border-right:2px solid #ccc">81.31</td>
+                <td>3141</td>
+                <td>8684</td>
+                <td>620</td>
+                <td>5500</td>
+                <td>4486</td>
+              </tr>
+              <tr>
+                <td>CoT Thinking (Greedy)</td>
+                <td>94.61</td>
+                <td><b>73.33</b></td>
+                <td>93.60</td>
+                <td>66.16</td>
+                <td style="border-right:2px solid #ccc">81.92</td>
+                <td><b>2877</b></td>
+                <td>9457</td>
+                <td>606</td>
+                <td><b>4443</b></td>
+                <td>4345</td>
+              </tr>
+              <tr style="font-weight:bold;">
+                <td>Soft Thinking</td>
+                <td>94.80</td>
+                <td><b>73.33</b></td>
+                <td>94.90</td>
+                <td>66.66</td>
+                <td style="border-right:2px solid #ccc">82.42</td>
+                <td>3021</td>
+                <td><b>6644</b></td>
+                <td><b>597</b></td>
+                <td>4470</td>
+                <td>3683</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-justified" style="margin-top:1em;">
+          <b>Table:</b> Comparison of <em>Soft Thinking</em> and various baseline methods on accuracy and generation length of correct answers across mathematical datasets. Best results are highlighted in <b>bold</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="font-size: 0.95em;">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align: middle;">Method</th>
+                <th colspan="4" style="text-align: center;">Accuracy &uarr;</th>
+                <th colspan="4" style="text-align: center;">Generation Length &darr;</th>
+              </tr>
+              <tr>
+                <th>HumanEval</th>
+                <th>MBPP</th>
+                <th>LiveCodeBench</th>
+                <th>Avg.</th>
+                <th>HumanEval</th>
+                <th>MBPP</th>
+                <th>LiveCodeBench</th>
+                <th>Avg.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="9" style="text-align:center; font-weight:bold; background:#f5f5f5;">QwQ-32B&nbsp;<a href="https://arxiv.org/pdf/2412.06559" target="_blank" style="font-size:0.9em;">[1]</a></td>
+              </tr>
+              <tr>
+                <td>CoT Thinking</td>
+                <td>97.63</td>
+                <td>97.49</td>
+                <td>62.00</td>
+                <td>85.70</td>
+                <td>2557</td>
+                <td>2154</td>
+                <td>9986</td>
+                <td>4899</td>
+              </tr>
+              <tr>
+                <td>CoT Thinking (Greedy)</td>
+                <td>95.73</td>
+                <td>96.50</td>
+                <td>57.35</td>
+                <td>83.19</td>
+                <td><b>2396</b></td>
+                <td><b>2069</b></td>
+                <td><b>7034</b></td>
+                <td><b>3833</b></td>
+              </tr>
+              <tr style="font-weight:bold;">
+                <td>Soft Thinking</td>
+                <td><b>98.17</b></td>
+                <td><b>97.66</b></td>
+                <td><b>62.72</b></td>
+                <td><b>86.18</b></td>
+                <td>2638</td>
+                <td>2157</td>
+                <td>7535</td>
+                <td>4110</td>
+              </tr>
+              <tr>
+                <td colspan="9" style="text-align:center; font-weight:bold; background:#f5f5f5;">DeepSeek-R1-Distill-Qwen-32B&nbsp;<a href="https://arxiv.org/pdf/2501.12948" target="_blank" style="font-size:0.9em; color: #2a7f62">[2]</a></td>
+              </tr>
+              <tr>
+                <td>CoT Thinking</td>
+                <td>97.25</td>
+                <td>95.13</td>
+                <td>57.33</td>
+                <td>83.23</td>
+                <td>3095</td>
+                <td>2761</td>
+                <td>8376</td>
+                <td>4744</td>
+              </tr>
+              <tr>
+                <td>CoT Thinking (Greedy)</td>
+                <td>87.19</td>
+                <td>87.54</td>
+                <td>43.36</td>
+                <td>72.70</td>
+                <td><b>2294</b></td>
+                <td><b>1703</b></td>
+                <td><b>4702</b></td>
+                <td><b>2900</b></td>
+              </tr>
+              <tr style="font-weight:bold;">
+                <td>Soft Thinking</td>
+                <td><b>97.56</b></td>
+                <td><b>95.33</b></td>
+                <td><b>59.50</b></td>
+                <td><b>84.13</b></td>
+                <td>2713</td>
+                <td>2534</td>
+                <td>6255</td>
+                <td>3834</td>
+              </tr>
+              <tr>
+                <td colspan="9" style="text-align:center; font-weight:bold; background:#f5f5f5;">DeepSeek-R1-Distill-Llama-70B&nbsp;<a href="https://arxiv.org/pdf/2501.12948" target="_blank" style="font-size:0.9em; color: #6e6e6e">[3]</a></td>
+              </tr>
+              <tr>
+                <td>CoT Thinking</td>
+                <td>97.71</td>
+                <td>94.77</td>
+                <td>56.94</td>
+                <td>83.14</td>
+                <td>2711</td>
+                <td>2386</td>
+                <td>8319</td>
+                <td>4472</td>
+              </tr>
+              <tr>
+                <td>CoT Thinking (Greedy)</td>
+                <td>92.07</td>
+                <td>91.82</td>
+                <td>48.02</td>
+                <td>77.30</td>
+                <td>2192</td>
+                <td>1979</td>
+                <td>5438</td>
+                <td>3203</td>
+              </tr>
+              <tr style="font-weight:bold;">
+                <td>Soft Thinking</td>
+                <td><b>98.17</b></td>
+                <td><b>94.94</b></td>
+                <td><b>58.42</b></td>
+                <td><b>83.84</b></td>
+                <td>2498</td>
+                <td>2214</td>
+                <td>6512</td>
+                <td>3741</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="has-text-justified" style="margin-top:1em;">
+            <b>Table:</b> Comparison of <em>Soft Thinking</em> and various baseline methods on accuracy and generation length of correct answers across three coding datasets. Best results are highlighted in <b>bold</b>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+
+    </code></pre>
+  </div>
+</section>
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a rel="license"
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a rel="license"
+            href="https://gligen.github.io/">GLIGEN</a>, licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+
+
+
+
+<script>
+  let data = [];
+  let currentIndex = 0;
+  const videoUrlPrefix = "https://videounderstanding.s3.us-east-2.amazonaws.com/";
+
+  function loadCSV() {
+    $.ajax({
+      type: "GET",
+      url: "./static/webdemo_data.csv",
+      dataType: "text",
+      success: function(response) {
+        data = $.csv.toObjects(response);
+        updateContent();
+      }
+    });
   }
 
-  body {
-    font-family: 'Noto Sans', sans-serif;
-    background-color: #fcfcfc;
-    color: #2f2f2f;
+  function updateContent() {
+    if (data.length > 0 && currentIndex >= 0 && currentIndex < data.length) {
+      const currentData = data[currentIndex];
+      const videoUrl = videoUrlPrefix + currentData.video_url;
+      $('#video-source').attr('src', videoUrl);
+      $('#example-video')[0].load();
+      $('#question').text(currentData.question);
+      $('#discipline').text(currentData.domain);
+      $('#subdiscipline').text(currentData.subdomain);
+      const options = [currentData.option_a, currentData.option_b, currentData.option_c, currentData.option_d];
+      $('#options').empty();
+      options.forEach(option => {
+        $('#options').append(`<option value="${option}">${option}</option>`);
+      });
+    }
   }
 
-  h1.title, h2.title, h3.title {
-    font-family: 'Google Sans', sans-serif;
-    color: #1a1a1a;
-  }
+  $('#next-button').on('click', function() {
+    if (currentIndex < data.length - 1) {
+      currentIndex++;
+      updateContent();
+    }
+  });
 
-  /* Author and affiliation styling */
-  .publication-authors .author-block sup {
-    color: #6e6e6e;
-  }
+  $('#prev-button').on('click', function() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateContent();
+    }
+  });
 
-  .publication-authors a {
-    color: #0066cc;
-    text-decoration: none;
-  }
+  $(document).ready(function() {
+    loadCSV();
+    
+    const observer = new MutationObserver(() => {
+      const alertElement = document.querySelector('crowd-form').shadowRoot.querySelector('crowd-alert').shadowRoot.querySelector('awsui-alert');
+      if (alertElement) {
+        alertElement.style.display = 'none';
+      }
+    });
+    
+    observer.observe(document.querySelector('crowd-form').shadowRoot, { childList: true, subtree: true });
+  });
+</script>
 
-  .publication-authors a:hover {
-    text-decoration: underline;
-  }
 
-  /* Buttons refinement */
-  .publication-links .button {
-    background: #1e1e1e;
-    color: white;
-    border: none;
-  }
+<!-- Additional libraries for parsing CSV -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
 
-  .publication-links .button:hover {
-    background-color: #363636;
-    color: white;
-  }
-
-  /* Reference link colors */
-  a[href*="arxiv.org"] {
-    color: #c7254e;
-    font-weight: bold;
-  }
-
-  /* Teaser image adjustments */
-  #teaser {
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
-
-  /* Icon alignment fix */
-  h2.title img {
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-
-  /* Table style adjustments */
-  table.table {
-    background: white;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  }
-
-  .table thead {
-    background-color: #f0f0f0;
-  }
-
-  .table th, .table td {
-    vertical-align: middle !important;
-    text-align: center;
-  }
-
-  .table-container {
-    margin-top: 1.5rem;
-  }
-
-  /* Footer styling */
-  footer.footer {
-    background-color: #fafafa;
-    color: #6e6e6e;
-    font-size: 0.9em;
-  }
-
-  footer.footer a {
-    color: #007acc;
-  }
-</style>
+</body>
+</html>
