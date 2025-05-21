@@ -280,7 +280,11 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">
+        <img width="5%" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="vertical-align: middle; margin-right: 10px;">
+          Abstract
+        </h2>
+        <!-- <h2 class="title is-3">Abstract</h2> -->
         <div class="content has-text-justified">
           <p>
             Human cognition typically involves thinking through abstract, fluid concepts rather than strictly using discrete linguistic tokens. Current Large Language Models (LLMs), however, are constrained to reasoning within the boundaries of human language, processing discrete token embeddings that represent fixed points in semantic space. This discrete constraint restricts the expressive power and upper potential of such reasoning models, often causing incomplete exploration of reasoning paths, as standard Chain-of-Thought (CoT) methods rely on sampling one token per step. In this work, we introduce Soft Thinking, a training-free method that emulates human-like "soft" reasoning by generating soft, abstract concept tokens in a continuous concept space. These concept tokens are created by the probability-weighted mixture of token embeddings, which form the continuous concept space, enabling smooth transitions and richer representations that transcend traditional discrete boundaries. In essence, each generated concept token encapsulates multiple meanings from related discrete tokens, implicitly exploring various reasoning paths to converge effectively toward the correct answer. Empirical evaluations on diverse mathematical and coding benchmarks consistently demonstrate the effectiveness and efficiency of Soft Thinking, improving pass@1 accuracy by up to 2.48 points while simultaneously reducing token usage by up to 22.4% compared to standard CoT. Qualitative analysis further reveals that Soft Thinking outputs remain highly interpretable and readable, highlighting the potential of Soft Thinking to break the inherent bottleneck of discrete language-based reasoning.
